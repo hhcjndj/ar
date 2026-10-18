@@ -1,55 +1,32 @@
-
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>AR 识别</title>
-
-  <!-- A-Frame 3D 框架 -->
+  <title>我的实体识别 AR</title>
+  
+  <!-- A-Frame 3D框架 -->
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-  <!-- AR.js 摄像头 + 图像识别 -->
-  <script src="https://cdn.jsdelivr.net/npm/@ar-js-org/ar.js@3.4.0/aframe/build/aframe-ar.js"></script>
-
-  <style>
-    html, body { margin: 0; height: 100%; overflow: hidden; }
-    .a-enter-vr { display: none !important; }
-  </style>
+  <!-- MindAR 图像追踪库 -->
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.1/dist/mindar-image-aframe.prod.js"></script>
 </head>
 <body>
 
-  <a-scene
-    embedded
-    vr-mode-ui="enabled: false"
-    renderer="logarithmicDepthBuffer: true; precision: medium"
-    arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; debugUIEnabled: false;">
+  <!-- 注意这里：imageTargetSrc 指向了你的 targets.mind 文件 -->
+  <a-scene mindar-image="imageTargetSrc: ./targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    
+    <a-entity mindar-image-target="targetIndex: 0">
+      
+      <!-- 这里是你要显示的文字 -->
+      <a-text 
+        value="扫描成功！这是浮现的文字。" 
+        position="0 0.5 0" 
+        color="#ff0000" 
+        width="4" 
+        align="center">
+      </a-text>
 
-    <!-- 识别 Hiro 标记 -->
-    <a-marker preset="hiro">
-
-      <!-- 缓慢旋转的 AR 模型 -->
-      <a-entity
-        position="0 0.5 0"
-        scale="0.5 0.5 0.5"
-        animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear">
-
-        <a-box position="0 0.5 0" color="#ff4d4f"
-               material="metalness: 0.7; roughness: 0.2"></a-box>
-
-        <a-sphere position="0 1.5 0" radius="0.45" color="#40a9ff"
-                  material="metalness: 0.3; roughness: 0.1"></a-sphere>
-
-        <a-torus position="0 0.5 0" radius="0.95" radius-tubular="0.05"
-                 color="#52c41a" rotation="90 0 0"></a-torus>
-
-      </a-entity>
-
-      <a-text value="Hello AR!" position="-0.9 2.3 0" width="3"
-              color="#ffffff" align="center"></a-text>
-
-    </a-marker>
-
-    <a-entity camera></a-entity>
+    </a-entity>
   </a-scene>
 
 </body>
