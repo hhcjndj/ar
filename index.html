@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AR 扫码测试</title>
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <!-- 换成了国内极速的 BootCDN -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
     body {
       margin: 0;
@@ -41,13 +42,14 @@
   </div>
 
   <div class="box hiro">
-    < img src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.0/data/images/hiro.png" alt="Hiro Marker">
+    <!-- 换成了国内能加载的 Hiro 标记图片 -->
+    < img src="https://fastly.jsdelivr.net/gh/AR-js-org/AR.js@3.4.0/data/images/hiro.png" alt="Hiro Marker">
     <p style="color:#333;margin:8px 0 0;">Hiro 标记</p >
   </div>
 
   <div class="tip">
-    <p>注意：必须通过 HTTPS 或 localhost 访问，手机才能调用摄像头。</p >
-    <p>如果二维码打不开，请检查手机和电脑是否在同一网络，或把文件上传到 GitHub Pages / Netlify 等 HTTPS 平台。</p >
+    <p>注意：必须通过 HTTPS 访问，手机才能调用摄像头。</p >
+    <p>如果手机打开 ar.html 一片黑屏或没反应，请确保允许了摄像头权限。</p >
   </div>
 
   <script>
