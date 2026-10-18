@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AR 扫码测试</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 30px;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      text-align: center;
+    }
+    h1 { font-size: 22px; margin-bottom: 8px; }
+    p { color: #aaa; font-size: 14px; }
+    .box {
+      display: inline-block;
+      background: #fff;
+      padding: 16px;
+      border-radius: 12px;
+      margin: 12px;
+      vertical-align: top;
+    }
+    #qrcode { width: 220px; height: 220px; }
+    #qrcode img { width: 100%; height: 100%; }
+    .hiro img { width: 220px; height: 220px; display: block; }
+    .tip { max-width: 600px; margin: 20px auto; line-height: 1.7; }
+  </style>
+</head>
+<body>
+
+  <h1>手机扫码进入 AR</h1>
+  <p>手机扫码后，把摄像头对准下面的 Hiro 标记</p >
+
+  <div class="box">
+    <div id="qrcode"></div>
+    <p style="color:#333;margin:8px 0 0;">扫码打开 ar.html</p >
+  </div>
+
+  <div class="box hiro">
+    < img src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.0/data/images/hiro.png" alt="Hiro Marker">
+    <p style="color:#333;margin:8px 0 0;">Hiro 标记</p >
+  </div>
+
+  <div class="tip">
+    <p>注意：必须通过 HTTPS 或 localhost 访问，手机才能调用摄像头。</p >
+    <p>如果二维码打不开，请检查手机和电脑是否在同一网络，或把文件上传到 GitHub Pages / Netlify 等 HTTPS 平台。</p >
+  </div>
+
+  <script>
+    // 自动生成指向 ar.html 的二维码
+    var arUrl = new URL('ar.html', window.location.href).href;
+    new QRCode(document.getElementById("qrcode"), {
+      text: arUrl,
+      width: 220,
+      height: 220,
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  </script>
+
+</body>
+</html>

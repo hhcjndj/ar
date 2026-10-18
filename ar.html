@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>AR 识别</title>
+
+  <!-- A-Frame 3D 框架 -->
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <!-- AR.js 摄像头 + 图像识别 -->
+  <script src="https://cdn.jsdelivr.net/npm/@ar-js-org/ar.js@3.4.0/aframe/build/aframe-ar.js"></script>
+
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; }
+    .a-enter-vr { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <a-scene
+    embedded
+    vr-mode-ui="enabled: false"
+    renderer="logarithmicDepthBuffer: true; precision: medium"
+    arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; debugUIEnabled: false;">
+
+    <!-- 识别 Hiro 标记 -->
+    <a-marker preset="hiro">
+
+      <!-- 缓慢旋转的 AR 模型 -->
+      <a-entity
+        position="0 0.5 0"
+        scale="0.5 0.5 0.5"
+        animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear">
+
+        <a-box position="0 0.5 0" color="#ff4d4f"
+               material="metalness: 0.7; roughness: 0.2"></a-box>
+
+        <a-sphere position="0 1.5 0" radius="0.45" color="#40a9ff"
+                  material="metalness: 0.3; roughness: 0.1"></a-sphere>
+
+        <a-torus position="0 0.5 0" radius="0.95" radius-tubular="0.05"
+                 color="#52c41a" rotation="90 0 0"></a-torus>
+
+      </a-entity>
+
+      <a-text value="Hello AR!" position="-0.9 2.3 0" width="3"
+              color="#ffffff" align="center"></a-text>
+
+    </a-marker>
+
+    <a-entity camera></a-entity>
+  </a-scene>
+
+</body>
+</html>
