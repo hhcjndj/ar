@@ -3,33 +3,56 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>我的实体识别 AR</title>
+  <title>AR 实体识别</title>
   
-  <!-- A-Frame 3D框架 -->
-  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-  <!-- MindAR 图像追踪库 -->
-  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.1/dist/mindar-image-aframe.prod.js"></script>
+  <style>
+    body, html { margin: 0; padding: 0; height: 100%; background-color: #000; overflow: hidden; }
+    #loading {
+      position: absolute; top: 40%; width: 100%; text-align: center;
+      color: #fff; font-size: 16px; font-family: sans-serif; z-index: 999;
+    }
+    /* 隐藏 VR 按钮 */
+    .a-enter-vr { display: none !important; }
+  </style>
+
+  <!-- 使用国内 360 极速 CDN，绝对不会卡加载 -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/aframe/1.4.2/aframe.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/mind-ar/1.2.1/mindar-image-aframe.prod.js"></script>
 </head>
 <body>
 
-  <!-- 注意这里：imageTargetSrc 指向了你的 targets.mind 文件 -->
-  <a-scene mindar-image="imageTargetSrc: ./targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+  <div id="loading">正在启动摄像头...<br>请确保已允许权限</div>
+
+  <!-- 注意：imageTargetSrc 指向你的 targets.mind -->
+  <a-scene mindar-image="imageTargetSrc: ./targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false" embedded>
     
     <a-entity mindar-image-target="targetIndex: 0">
       
-      <!-- 这里是你要显示的文字 -->
+      <!-- 你要显示的文字 -->
       <a-text 
         value="我们是黑天鹅，自远方翩然而至，落脚于岭南书香学府。一身墨羽卷曲，缀着细碎光斑，双翼藏白羽，红喙鲜明，我们以水藻、水生植物为食，悠然栖游。
 恰逢二零二六，惠州学院迎来建校八十周年。八十载弦歌不辍，八十载薪火相传，这座学府沉淀岁月底蕴，孕育万千桃李。幸得机缘，我们跨山海而来，成为蓬瀛湖的新伙伴。
-天鹅素有鸿鹄之喻，象征心怀远志，振翅求索，勇探新知，奔赴理想前路。蓬瀛清波，映校园风物，亦见证惠院八秩荣光。我们泛游湖面，为校园添一抹灵动生机。愿伴惠院朝夕，同师生一道，见证学府赓续发展，启崭新征程！。" 
+天鹅素有鸿鹄之喻，象征心怀远志，振翅求索，勇探新知，奔赴理想前路。蓬瀛清波，映校园风物，亦见证惠院八秩荣光。我们泛游湖面，为校园添一抹灵动生机。愿伴惠院朝夕，同师生一道，见证学府赓续发展，启崭新征程！" 
         position="0 0.5 0" 
-        color="#ff0000" 
+        color="#00ff00" 
         width="4" 
-        align="center">
+        align="center"
+        text="font: mozillavr;">
       </a-text>
 
     </a-entity>
   </a-scene>
+
+  <script>
+    // 启动成功后自动隐藏“加载中”提示
+    document.querySelector('a-scene').addEventListener('arReady', () => {
+      document.getElementById('loading').style.display = 'none';
+    });
+    // 兜底隐藏
+    setTimeout(() => {
+      document.getElementById('loading').style.display = 'none';
+    }, 4000);
+  </script>
 
 </body>
 </html>
